@@ -1,0 +1,46 @@
+---
+title: "Take-Home Final"
+author: "Bartlomiej Morawski"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 1
+```{r}
+#load("ThreeCancers.RData")
+
+# (i)
+num.of.subj <- nrow(GeneExp) # number of subjects in the matrix
+num.of.subj
+
+num.of.genes <- ncol(GeneExp)
+num.of.genes
+
+# (ii)
+count <- 0
+a <- 1
+for (i in CancerType){
+  if (CancerType[a] == "LUAD"){
+    count <- count + 1
+    }
+  a <- a + 1
+}
+count
+
+# (iii)
+mean(GeneExp[,2])
+
+# (iv)
+library(ggplot2)
+ggplot(data=GeneExp, mapping=aes(x=GeneExp$Gene45, y=GeneExp$Gene68)) +
+geom_point()
+
+# (v)
+cor.test(GeneExp$Gene45, GeneExp$Gene68)
+
+```
+
