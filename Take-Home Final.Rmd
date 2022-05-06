@@ -1,14 +1,67 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Take-Home Final"
+author: "Bartlomiej Morawski"
+date: "`r Sys.Date()`"
+output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
+## Problem 1
 ```{r}
 load("ThreeCancers.RData")
-install.packages('ggplot2')
-y = as.numeric(CancerType == 'KIRC')
+
+# (i)
+num.of.subj <- nrow(GeneExp) # number of subjects in the matrix
+num.of.subj
+
+num.of.genes <- ncol(GeneExp)
+num.of.genes
+
+# (ii)
+count <- 0
+a <- 1
+for (i in CancerType){
+  if (CancerType[a] == "LUAD"){
+    count <- count + 1
+    }
+  a <- a + 1
+}
+count
+
+# (iii)
+mean(GeneExp[,2])
+
+# (iv)
+library(ggplot2)
+ggplot(data=GeneExp, mapping=aes(x=GeneExp$Gene45, y=GeneExp$Gene68)) +
+geom_point()
+
+# (v)
+cor.test(GeneExp$Gene45, GeneExp$Gene68)
+
 ```
+
+## Problem 2
+
+(i) Make a box plot of Gene15 vs CancerType and pass it the following arguemnts: col = c("red", "green", "blue") and ylab = "Gene15"
+```{r}
+plot(CancerType, GeneExp$Gene15, col = c("red", "green", "blue"), ylab = "Gene 15")
+```
+
+(ii) What does the red box represent?
+
+The red box represents the correlation between the expression of gene 15 in the subjects and the subjects with BRCA cancer. 
+
+(iii) Which cancer type(s) have outliers
+
+Cancer's BRCA and KIRC have outliers.
+
+(iv) Which cancer type has the smallest median expression level?
+
+Cancer KIRC has the smallest median expression level. 
 
 ```{r}
 # Question 3i 
@@ -46,5 +99,4 @@ y = beta0 + beta1 * x
 plot(x, y)
 lines(x, y, col='blue')
 ```
-
 
