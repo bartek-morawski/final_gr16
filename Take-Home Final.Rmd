@@ -1,3 +1,4 @@
+
 ---
 title: "Take-Home Final"
 author: "Bartlomiej Morawski"
@@ -62,4 +63,6 @@ Cancer's BRCA and KIRC have outliers.
 (iv) Which cancer type has the smallest median expression level?
 
 Cancer KIRC has the smallest median expression level. 
+
+
 
