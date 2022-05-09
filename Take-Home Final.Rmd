@@ -63,7 +63,7 @@ Cancer's BRCA and KIRC have outliers.
 Cancer KIRC has the smallest median expression level. 
 
 
-## Question 3
+## Problem 3
 ```{r}
 y = as.numeric(CancerType == 'KIRC')
 
@@ -84,7 +84,7 @@ summary(fit)
 ```
 
 
-Problem 4
+## Problem 4
 
 (i) Uncomment and complete the following code to perform k-means clustering using the GeneExp matrix with three clusters:
 
