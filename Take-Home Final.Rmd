@@ -63,7 +63,7 @@ Cancer's BRCA and KIRC have outliers.
 
 Cancer KIRC has the smallest median expression level. 
 
-```{r}
+
 # Question 3
 y = as.numeric(CancerType == 'KIRC')
 
@@ -101,4 +101,43 @@ According to the contingency table, cluster 2 best represents the patients with 
 
 The kmeans function organizes a group of data into clusters based on similarities in the data. In this problem, kmeans was used to organize the data frame depicting different gene expressions into three different clusters; this means that each cluster hold data that is most similar to the data in the same cluster, and is significantly different from the data in other clusters. The KIRC cancer type is most prominent in cluster 2; meaning that the gene expressions in cluster 2 are most indicative of the KIRC cancer type. LUAD is most prominent in cluster 1; meaning the gene expressions in cluster 1 are most indicative of the LUAD cancer type. Therefore, the gene expression profile of a KIRC patient and that of a LUAD patient must be very different. 
 
+
+## Problem 5
+```{r}
+# (i)
+GeneExp.dist = dist(x = GeneExp[(1:10),], method = "euclidean")
+
+# (ii)
+gene.hclust = hclust(d = GeneExp.dist, method = "complete")
+
+# (iii)
+GeneExp.dist.mat <- as.matrix(GeneExp.dist)
+
+# (iv)
+# The Euclidean distance between subjects on and two is 18.08654
+GeneExp.dist.mat[1,2]
+
+# (v)
+x <- GeneExp[1,]
+y <- GeneExp[2,]
+
+dist <- x-y
+dist <- dist^2
+dist <- sum(dist)
+dist <- sqrt(dist)
+dist
+
+# (vi) Which subject has the smallest distance to Subject5?
+# Subject 9 has the smallest distance to subject 5, measured at 7.784195.
+x <- as.vector(GeneExp.dist.mat[,5])
+x2 <- x[-5]
+min(x2)
+
+# (vii)
+# some other linkage criteria include single-linkage and weighted or weighted average linkage clustering.
+
+# (vii)
+# The distance is 17.99
+max(17.99, 16.95) 
+```
 
