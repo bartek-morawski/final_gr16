@@ -63,40 +63,80 @@ Cancer's BRCA and KIRC have outliers.
 
 Cancer KIRC has the smallest median expression level. 
 
-```{r}
-# Question 3i 
-set.seed(10)
-# explanatory variable 
-x <- seq(0,3, length.out = 30)
-#noise 
-noise <- rnorm(n= 30, mean= 0, sd = .1)
-#observed data
-y <- 3 + .5*x + noise
-# make dataframe 
-df <- data.frame(list(explanatory= x, observed_val = y))
 
-# plot observed data plus true data generating function
-plot(x = x, y= y)
-lines(x = x, y = 3 + .5*x)
+## Problem 3
+```{r}
+# (i)
+
+y <- as.numeric(CancerType == 'KIRC')
+x <- GeneExp$Gene15
+
+df <- data.frame(list(explanatory = x, observed_val = y))
 
 fit <- lm(formula = observed_val ~ explanatory, data = df)
 summary(fit) 
 
-# Question 3ii
-#a) The estimated coefficant is 0.48226 
-#b) the p value associated with the coefficiant for Gene15 is  < 2.2e-16
-#c) The p-values for the null hypotheis that the corresponding coefficient is zero.
-#d) we can conclude that the coefficients you get estimates the standard errors, t-values and p-values
+# (ii)
+# a) The estimated coefficant is -0.073684 
+# b) the p value associated with the coefficiant for Gene15 is  1.1*10^-15
+# c) The p-values for the null hypotheis that the corresponding coefficient is zero.
+# d) we can conclude that the coefficients you get estimates the standard errors, t-values and p-values
 
-#Question 3iii
+# (iii)
 # the following code gives us the linear function
-#β0 is the unknown intercept which is 5
-#β1 the unknown slope  which is 2
+# β0 is the unknown intercept which is 5
+# β1 the unknown slope  which is 2
 x = seq(0, 10, by = 0.5)
 beta0 = 5
 beta1 = 2
 y = beta0 + beta1 * x 
 plot(x, y)
 lines(x, y, col='blue')
+```
+
+
+
+
+
+
+
+
+## Problem 5
+```{r}
+# (i)
+GeneExp.dist = dist(x = GeneExp[(1:10),], method = "euclidean")
+
+# (ii)
+gene.hclust = hclust(d = GeneExp.dist, method = "complete")
+
+# (iii)
+GeneExp.dist.mat <- as.matrix(GeneExp.dist)
+
+# (iv)
+# The Euclidean distance between subjects on and two is 18.08654
+GeneExp.dist.mat[1,2]
+
+# (v)
+x <- GeneExp[1,]
+y <- GeneExp[2,]
+
+dist <- x-y
+dist <- dist^2
+dist <- sum(dist)
+dist <- sqrt(dist)
+dist
+
+# (vi) Which subject has the smallest distance to Subject5?
+# Subject 9 has the smallest distance to subject 5, measured at 7.784195.
+x <- as.vector(GeneExp.dist.mat[,5])
+x2 <- x[-5]
+min(x2)
+
+# (vii)
+# some other linkage criteria include single-linkage and weighted or weighted average linkage clustering.
+
+# (vii)
+# The distance is 17.99
+max(17.99, 16.95) 
 ```
 
