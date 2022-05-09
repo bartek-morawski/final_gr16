@@ -41,7 +41,6 @@ geom_point()
 
 # (v)
 cor.test(GeneExp$Gene45, GeneExp$Gene68)
-
 ```
 
 ## Problem 2
@@ -64,35 +63,46 @@ Cancer's BRCA and KIRC have outliers.
 Cancer KIRC has the smallest median expression level. 
 
 
-## Problem 3
+## Question 3
 ```{r}
+y = as.numeric(CancerType == 'KIRC')
+
 # (i)
+fit <- lm(formula = y ~ GeneExp$Gene15)
 
-y <- as.numeric(CancerType == 'KIRC')
-x <- GeneExp$Gene15
-
-df <- data.frame(list(explanatory = x, observed_val = y))
-
-fit <- lm(formula = observed_val ~ explanatory, data = df)
+# (ii) 
 summary(fit) 
 
-# (ii)
-# a) The estimated coefficant is -0.073684 
+# a) The estimated coefficient is -0.073684
 # b) the p value associated with the coefficiant for Gene15 is  1.1*10^-15
-# c) The p-values for the null hypotheis that the corresponding coefficient is zero.
-# d) we can conclude that the coefficients you get estimates the standard errors, t-values and p-values
+# c) The null hypthoesis is that this  coefficient is equal to zero.
+# d) Based on the p-value we can reject the null hypothesis as the estimated result does not equal zero. 
 
 # (iii)
-# the following code gives us the linear function
-# β0 is the unknown intercept which is 5
-# β1 the unknown slope  which is 2
-x = seq(0, 10, by = 0.5)
-beta0 = 5
-beta1 = 2
-y = beta0 + beta1 * x 
-plot(x, y)
-lines(x, y, col='blue')
+# B0 = .599268
+# B1 = -0.073684
 ```
+
+
+Problem 4
+
+(i) Uncomment and complete the following code to perform k-means clustering using the GeneExp matrix with three clusters:
+
+(ii) Uncomment and complete the following code to obtain a contingency table that has the patient counts for each cluster and cancer type. Make sure you ran the set.seed and kmeans functions together in the previous part:
+
+```{r}
+set.seed(1)
+gene.kmeans = kmeans (GeneExp, centers = 3)
+table(gene.kmeans$cluster, CancerType)
+```
+(iii) According to the above contingency table, which cluster (from the k-means output) best represents the patients with KIRC cancer?
+
+According to the contingency table, cluster 2 best represents the patients with KIRC cancer. 
+
+(iv) Argue that the k-means result shows the gene expression profile of a KIRC patient and that of a LUAD patient tends to be very different.
+
+The kmeans function organizes a group of data into clusters based on similarities in the data. In this problem, kmeans was used to organize the data frame depicting different gene expressions into three different clusters; this means that each cluster hold data that is most similar to the data in the same cluster, and is significantly different from the data in other clusters. The KIRC cancer type is most prominent in cluster 2; meaning that the gene expressions in cluster 2 are most indicative of the KIRC cancer type. LUAD is most prominent in cluster 1; meaning the gene expressions in cluster 1 are most indicative of the LUAD cancer type. Therefore, the gene expression profile of a KIRC patient and that of a LUAD patient must be very different. 
+
 
 
 
